@@ -177,10 +177,16 @@ function SolapaCarta({
   return (
     <div className="space-y-12">
       <p className="max-w-2xl text-[0.95rem] leading-relaxed text-[var(--color-marino)]/70">
-        Tocá <strong className="font-semibold">Hay</strong> para marcar que algo se agotó: deja
-        de poder pedirse y aparece tachado en la web.{' '}
-        <strong className="font-semibold">Llevar</strong> controla si el plato entra en el
-        armador de pedidos (los huevos rotos y las cañas conviene dejarlos apagados).
+        Cada plato tiene dos botones que muestran cómo está ahora. Tocalos para cambiarlos.
+        <br />
+        <strong className="font-semibold text-[var(--color-marino)]">Hay / No hay:</strong> si lo
+        dejás en <em>No hay</em>, el plato aparece tachado en la web y nadie puede pedirlo.
+        <br />
+        <strong className="font-semibold text-[var(--color-marino)]">
+          Para llevar / Solo en el local:
+        </strong>{' '}
+        define si se puede pedir por WhatsApp. Los huevos rotos y las cañas conviene dejarlos en{' '}
+        <em>Solo en el local</em> porque no viajan bien.
       </p>
 
       {categorias.map((categoria) => {
@@ -241,12 +247,14 @@ function SolapaCarta({
 
                   <Interruptor
                     activo={producto.disponible}
-                    etiqueta="Hay"
+                    siActivo="Hay"
+                    siApagado="No hay"
                     onCambiar={(v) => actualizar(producto.id, { disponible: v })}
                   />
                   <Interruptor
                     activo={producto.take_away}
-                    etiqueta="Llevar"
+                    siActivo="Para llevar"
+                    siApagado="Solo en el local"
                     onCambiar={(v) => actualizar(producto.id, { take_away: v })}
                   />
 
@@ -579,27 +587,43 @@ function SolapaAjustes({
 
 /* ══ Piezas ══════════════════════════════════════════════════════════════ */
 
+/**
+ * Muestra el estado actual, no la acción. Si dice "No hay", es que no hay:
+ * tocarlo lo vuelve a poner en "Hay".
+ */
 function Interruptor({
   activo,
-  etiqueta,
+  siActivo,
+  siApagado,
   onCambiar,
 }: {
   activo: boolean;
-  etiqueta: string;
+  siActivo: string;
+  siApagado: string;
   onCambiar: (v: boolean) => void;
 }) {
+  const etiqueta = activo ? siActivo : siApagado;
+
   return (
     <button
       type="button"
       role="switch"
       aria-checked={activo}
+      aria-label={`${etiqueta} — tocá para cambiar`}
+      title={activo ? `Tocá para pasar a "${siApagado}"` : `Tocá para pasar a "${siActivo}"`}
       onClick={() => onCambiar(!activo)}
-      className={`rounded-full border-[1.5px] px-3 py-1.5 text-[0.78rem] font-bold transition-all ${
+      className={`flex shrink-0 items-center gap-1.5 rounded-full border-[1.5px] px-3 py-1.5 text-[0.78rem] font-bold whitespace-nowrap transition-all ${
         activo
           ? 'border-transparent bg-[var(--color-cobalto)] text-[var(--color-cal)]'
-          : 'border-[var(--color-marino)]/18 text-[var(--color-marino)]/40'
+          : 'border-[var(--color-teja)]/45 bg-[var(--color-teja)]/8 text-[var(--color-teja)]'
       }`}
     >
+      <span
+        aria-hidden="true"
+        className={`inline-block h-1.5 w-1.5 rounded-full ${
+          activo ? 'bg-[var(--color-cal)]' : 'bg-[var(--color-teja)]'
+        }`}
+      />
       {etiqueta}
     </button>
   );
