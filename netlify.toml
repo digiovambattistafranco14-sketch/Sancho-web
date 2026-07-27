@@ -4,6 +4,11 @@
 [build.environment]
   NODE_VERSION = "22"
 
+  # Las claves NEXT_PUBLIC_* son públicas por diseño: Next las incrusta en el
+  # JavaScript del navegador. Sin esta línea, el escáner de secretos de Netlify
+  # las detecta en el build y aborta el deploy.
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY"
+
 # Runtime oficial de Next.js: maneja el SSR de /admin y el middleware de sesión.
 [[plugins]]
   package = "@netlify/plugin-nextjs"
