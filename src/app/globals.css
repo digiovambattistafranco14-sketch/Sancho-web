@@ -1,0 +1,273 @@
+@import 'tailwindcss';
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SANCHO — sistema visual
+   Tomado de la marca real: letras corpóreas cobalto sobre ladrillo encalado,
+   postigos azules, macetas de terracota y el rojo teja que usan en la carta
+   para "Especial" y "Postres".
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  --color-cal: #faf7f1;
+  --color-cal-hondo: #f1ece1;
+  --color-papel: #ffffff;
+
+  --color-cobalto: #1b3fa8;
+  --color-cobalto-vivo: #2f5ad0;
+  --color-marino: #101f47;
+  --color-marino-hondo: #0a1531;
+
+  --color-teja: #b3232e;
+  --color-burdeos: #7d1f2b;
+  --color-terracota: #c4703f;
+
+  --color-tinta: #14181f;
+  --color-humo: #6b7280;
+
+  --font-display: var(--fuente-display), 'Segoe UI', system-ui, sans-serif;
+  --font-cuerpo: var(--fuente-display), 'Segoe UI', system-ui, sans-serif;
+  --font-editorial: var(--fuente-editorial), Georgia, 'Times New Roman', serif;
+  --font-mono: var(--fuente-mono), ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --ease-suave: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background: var(--color-cal);
+    color: var(--color-tinta);
+    font-family: var(--font-cuerpo);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-cobalto);
+    color: var(--color-cal);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-cobalto-vivo);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* La marca escribe en mayúscula solo la inicial: Sancho, no SANCHO. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 0.92;
+  }
+}
+
+@layer utilities {
+  .contenedor {
+    width: min(100% - 2.5rem, 78rem);
+    margin-inline: auto;
+  }
+
+  .contenedor-angosto {
+    width: min(100% - 2.5rem, 56rem);
+    margin-inline: auto;
+  }
+
+  .titular {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.88;
+    font-size: clamp(2.75rem, 9vw, 7.5rem);
+  }
+
+  .titular-seccion {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 0.9;
+    font-size: clamp(2.25rem, 6vw, 4.5rem);
+  }
+
+  .editorial {
+    font-family: var(--font-editorial);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .etiqueta {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .precio {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  /* Subrayado dibujado a mano — el gesto que usan en toda su gráfica. */
+  .subrayado {
+    position: relative;
+    display: inline-block;
+  }
+  .subrayado::after {
+    content: '';
+    position: absolute;
+    left: -0.03em;
+    right: -0.03em;
+    bottom: -0.19em;
+    height: 0.26em;
+    background: no-repeat center / 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M3 10.5C38 4.5 78 2.5 118 3.5c28 .7 55 2.6 79 5.4' stroke='%231b3fa8' stroke-width='4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .subrayado-teja::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M3 10.5C38 4.5 78 2.5 118 3.5c28 .7 55 2.6 79 5.4' stroke='%23b3232e' stroke-width='4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+  }
+  .subrayado-cal::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M3 10.5C38 4.5 78 2.5 118 3.5c28 .7 55 2.6 79 5.4' stroke='%23faf7f1' stroke-width='4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+  }
+
+  /* Textura de cal: el ladrillo pintado de la fachada. */
+  .textura-cal {
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(27, 63, 168, 0.05), transparent 42%),
+      radial-gradient(circle at 88% 72%, rgba(196, 112, 63, 0.07), transparent 46%);
+  }
+
+  .borde-tinta {
+    border: 1.5px solid color-mix(in srgb, var(--color-marino) 16%, transparent);
+  }
+}
+
+/* ── Animaciones al scroll ───────────────────────────────────────────────── */
+
+.aparece {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.85s var(--ease-suave),
+    transform 0.85s var(--ease-suave);
+}
+
+.aparece.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.aparece-1 {
+  transition-delay: 0.08s;
+}
+.aparece-2 {
+  transition-delay: 0.16s;
+}
+.aparece-3 {
+  transition-delay: 0.24s;
+}
+.aparece-4 {
+  transition-delay: 0.32s;
+}
+
+@keyframes deriva {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquesina > div {
+  animation: deriva 38s linear infinite;
+}
+
+@keyframes trazo {
+  from {
+    stroke-dashoffset: var(--largo, 1200);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.trazo-anima path {
+  stroke-dasharray: var(--largo, 1200);
+  stroke-dashoffset: var(--largo, 1200);
+}
+
+.trazo-anima.visible path {
+  animation: trazo 2.2s var(--ease-suave) forwards;
+}
+
+@keyframes pulso-suave {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.pulso {
+  animation: pulso-suave 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .aparece {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .marquesina > div,
+  .pulso {
+    animation: none;
+  }
+  .trazo-anima path {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Barra de scroll ─────────────────────────────────────────────────────── */
+
+.scroll-fino::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.scroll-fino::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scroll-fino::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-cobalto) 30%, transparent);
+  border-radius: 99px;
+}
+
+.sin-scroll {
+  scrollbar-width: none;
+}
+.sin-scroll::-webkit-scrollbar {
+  display: none;
+}

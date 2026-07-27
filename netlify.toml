@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Runtime oficial de Next.js: maneja el SSR de /admin y el middleware de sesión.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

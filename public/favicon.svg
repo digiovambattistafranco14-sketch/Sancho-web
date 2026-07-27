@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#faf7f1"/>
+  <text x="32" y="47" font-family="Figtree, Segoe UI, system-ui, sans-serif" font-size="46"
+        font-weight="800" fill="#1b3fa8" text-anchor="middle" letter-spacing="-2">S</text>
+  <path d="M14 52 C26 48 40 48 50 51" stroke="#b3232e" stroke-width="4" stroke-linecap="round" fill="none"/>
+</svg>
