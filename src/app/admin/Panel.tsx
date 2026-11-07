@@ -6,6 +6,7 @@ import { Marca } from '@/componentes/Marca';
 import { pesos } from '@/lib/formato';
 import { supabaseNavegador } from '@/lib/supabase/cliente';
 import type { Categoria, Config, Producto, TapaDelDia } from '@/lib/types';
+import { refrescarCarta } from './acciones';
 
 type ConfigFila = Config & { precio_tapa: number };
 
@@ -39,6 +40,12 @@ export function Panel({
   function avisar(texto: string) {
     setAviso(texto);
     window.setTimeout(() => setAviso(null), 2600);
+  }
+
+  function recargar() {
+    router.refresh();
+    // Sin await: la home se regenera en segundo plano, el panel no espera.
+    void refrescarCarta();
   }
 
   async function salir() {
@@ -105,7 +112,7 @@ export function Panel({
             categorias={categorias}
             productos={productos}
             avisar={avisar}
-            recargar={() => router.refresh()}
+            recargar={recargar}
           />
         )}
         {solapa === 'mostrador' && (
@@ -113,11 +120,11 @@ export function Panel({
             tapas={tapas}
             precioTapa={config?.precio_tapa ?? 4500}
             avisar={avisar}
-            recargar={() => router.refresh()}
+            recargar={recargar}
           />
         )}
         {solapa === 'ajustes' && (
-          <SolapaAjustes config={config} email={email} avisar={avisar} recargar={() => router.refresh()} />
+          <SolapaAjustes config={config} email={email} avisar={avisar} recargar={recargar} />
         )}
       </main>
     </div>

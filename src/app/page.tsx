@@ -13,8 +13,10 @@ import { Pie } from '@/componentes/Pie';
 import { Portada } from '@/componentes/Portada';
 import { Visitanos } from '@/componentes/Visitanos';
 
-// La carta cambia a diario: se revalida seguido para que el panel se refleje rápido.
-export const revalidate = 60;
+// Página estática (ISR): se sirve desde caché, sin consultar Supabase en cada visita.
+// El panel la regenera al instante al guardar (ver admin/acciones.ts); esto es
+// solo una red de seguridad por si algún cambio se hace directo en Supabase.
+export const revalidate = 300;
 
 export default async function Inicio() {
   const { categorias, productos, tapas, config, precioTapa } = await cargarCarta();

@@ -2,9 +2,10 @@ import type { Metadata, Viewport } from 'next';
 import { DM_Mono, Figtree, Instrument_Serif } from 'next/font/google';
 import './globals.css';
 
+// Figtree es variable: sin `weight` baja un solo archivo con todos los pesos
+// (antes eran cinco archivos, uno por peso).
 const figtree = Figtree({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '800', '900'],
   variable: '--fuente-display',
   display: 'swap',
 });
@@ -22,6 +23,8 @@ const dmMono = DM_Mono({
   weight: ['400', '500'],
   variable: '--fuente-mono',
   display: 'swap',
+  // Solo etiquetas y precios: no compite con la portada por la carga inicial.
+  preload: false,
 });
 
 export const metadata: Metadata = {

@@ -1,4 +1,4 @@
-import { supabaseServidor } from './supabase/servidor';
+import { supabasePublico } from './supabase/publico';
 import {
   CATEGORIAS_BASE,
   CONFIG_BASE,
@@ -32,7 +32,7 @@ const BASE: Omit<CartaCompleta, 'enVivo'> = {
  * para que el sitio nunca se muestre roto.
  */
 export async function cargarCarta(): Promise<CartaCompleta> {
-  const supabase = await supabaseServidor();
+  const supabase = supabasePublico();
   if (!supabase) return { ...BASE, enVivo: false };
 
   try {
