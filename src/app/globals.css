@@ -157,10 +157,10 @@
 
 .aparece {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(16px);
   transition:
-    opacity 0.85s var(--ease-suave),
-    transform 0.85s var(--ease-suave);
+    opacity 0.5s var(--ease-suave),
+    transform 0.5s var(--ease-suave);
 }
 
 .aparece.visible {
@@ -169,16 +169,16 @@
 }
 
 .aparece-1 {
-  transition-delay: 0.08s;
+  transition-delay: 0.04s;
 }
 .aparece-2 {
-  transition-delay: 0.16s;
+  transition-delay: 0.08s;
 }
 .aparece-3 {
-  transition-delay: 0.24s;
+  transition-delay: 0.12s;
 }
 .aparece-4 {
-  transition-delay: 0.32s;
+  transition-delay: 0.16s;
 }
 
 @keyframes deriva {
